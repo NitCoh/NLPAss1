@@ -1,0 +1,16 @@
+In the last essay (by Andrej Karpathy) we saw that RNN (and specifically LSTM) are very good for various tasks.
+In detail, we built character-level language model for generating texts.
+
+In this essay, we deploy Unsmoothed Maximum Likelihood Character Level Language Model and see that its performence is not so different than the complex RNN.
+
+First, we train the LM for n-gram (n is chosen empirically) usind a dictionary where each key is a tuple (the n-gram) and the values is a collections.Counter object for the character proceeding the gram. Withit we compute the distribution of the character given a sequence of characters.
+
+Then, we generate text from the model by basically sample from the distributions we created. That is, we look in the history of the text and given it, by looking up the history in the dictionary, we sample.
+
+We can observe that for big n (~10) the generated text "looks like" English and is not so different than the ones generated with RNN. While this model is simple and uses simple statistics, unlike the blackbox of RNN/LSTM.
+
+So why RNN are still important?
+We can observe that the generated texts using it "remember" better. That is, the texts mostly do not have parentheses without closure and when learn indendation with texts such as Linux's Kernel.
+
+We can conculde that simple satistics can generate similar texts to RNN but the complex structure of RNN and the architecure of LSTM enable it to understand syntax.
+
